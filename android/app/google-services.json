@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "601206626159",
+    "project_id": "thinky-ad85d",
+    "storage_bucket": "thinky-ad85d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601206626159:android:05d833101bc55af56a3a9a",
+        "android_client_info": {
+          "package_name": "com.gunaya.thinky"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601206626159-17623i1u6astbq2bfo9eb043eo4v9arg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFo9VdclK4amUVsw6eO9kNtyHynO9f790"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601206626159-17623i1u6astbq2bfo9eb043eo4v9arg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "601206626159-aas5ug2bkpgmhpldj6ghef65v8puts50.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gunaya.thinky"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
