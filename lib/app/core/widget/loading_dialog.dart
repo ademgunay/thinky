@@ -9,6 +9,7 @@ extension LoadingDialogGet on GetInterface {
           color: Colors.purple,
         ),
       ),
+      barrierDismissible: false,
     );
   }
 }
