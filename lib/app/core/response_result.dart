@@ -3,7 +3,7 @@ class ResponseResult {
 
   factory ResponseResult.success(Object data) = SuccessResult;
 
-  factory ResponseResult.error(Exception exception) = ErrorResult;
+  factory ResponseResult.error(ResponseException exception) = ErrorResult;
 
   factory ResponseResult.complete() = CompleteResult;
 }
@@ -15,9 +15,16 @@ class SuccessResult extends ResponseResult {
 
 class ErrorResult extends ResponseResult {
   ErrorResult(this.exception) : super._();
-  final Exception exception;
+  final ResponseException exception;
 }
 
 class CompleteResult extends ResponseResult {
   CompleteResult() : super._();
+}
+
+class ResponseException with Exception {
+
+  ResponseException({required this.message});
+
+  String? message;
 }

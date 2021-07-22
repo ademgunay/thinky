@@ -13,7 +13,7 @@ class DefaultButton extends StatelessWidget {
       onPressed: onClicked(),
       // await _authRepository.registerUser(email, password);
       style: ElevatedButton.styleFrom(
-        primary: Colors.pink,
+        primary: Colors.purple,
         textStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
       child: Text(buttonText),

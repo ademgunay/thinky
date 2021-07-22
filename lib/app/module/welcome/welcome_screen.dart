@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => Get.toNamed(AppRoutes.LOGIN),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.pink,
+                  primary: Colors.purple,
                   textStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 child: Text("Login"),
@@ -34,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => Get.toNamed(AppRoutes.REGISTER),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.pink,
+                  primary: Colors.purple,
                   textStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 child: Text("Register"),

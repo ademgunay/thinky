@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:thinky/app/data/model/response_result.dart';
-import 'package:thinky/app/data/repository/auth_repository.dart';
-import 'package:thinky/app/routes/app_routes.dart';
+import 'package:thinky/app/module/register/register_controller.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -13,18 +11,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-
-  final AuthRepository _authRepository = Get.find<AuthRepository>();
-  final TextEditingController emailTextController = TextEditingController();
-  String email = "";
-  String password = "";
-  String confirmedPassword = "";
-
-  bool _isValidEmail(String email) {
-    return RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(email);
-  }
+  final RegisterController _registerController = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -51,77 +38,73 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 8),
                   child: TextFormField(
+                    autocorrect: false,
                     onChanged: (newText) {
-                      email = newText;
+                      _registerController.email.value = newText;
                     },
-                    validator: (email) {
-                      if (_isValidEmail(email!)) {
-                        return null;
-                      } else {
-                        return "Please enter a valid email";
-                      }
-                    },
+                    validator: (_) => _registerController.emailValidator(),
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter your email'),
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter your email',
+                    ),
+                    cursorColor: Colors.purple,
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 8),
                   child: TextFormField(
                     obscureText: true,
-                    onChanged: (newText) {
-                      password = newText;
+                    autocorrect: false,
+                    onChanged: (password) {
+                      _registerController.password.value = password;
                     },
-                    validator: (password) {
-                      if (password!.length < 6) {
-                        return "At least 6 characters";
-                      } else if (password.isEmpty) {
-                        return "Password is required";
-                      } else {
-                        return null;
-                      }
-                    },
+                    validator: (_) => _registerController.passwordValidator(),
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter your password'),
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter your password',
+                    ),
+                    cursorColor: Colors.purple,
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 8),
                   child: TextFormField(
                     obscureText: true,
-                    onChanged: (newText) {
-                      confirmedPassword = newText;
+                    autocorrect: false,
+                    onChanged: (confirmedPassword) {
+                      _registerController.confirmedPassword.value =
+                          confirmedPassword;
                     },
-                    validator: (confirmedPassword) {
-                      if (confirmedPassword != password) {
-                        return "This doesn't match password";
-                      } else {
-                        return null;
-                      }
-                    },
+                    validator: (_) =>
+                        _registerController.confirmedPasswordValidator(),
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Confirm your password'),
+                      border: OutlineInputBorder(),
+                      hintText: 'Confirm your password',
+                    ),
+                    cursorColor: Colors.purple,
                   ),
                 ),
                 SizedBox(height: 32),
+                Obx(
+                  () => Visibility(
+                    visible: _registerController.errorText.value != ""
+                        ? true
+                        : false,
+                    child: Text(
+                      _registerController.errorText.value,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
                 ElevatedButton(
                   child: Text("Submit"),
-                  onPressed: () async {
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.purple,
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      //TODO Show progress
-                      ResponseResult result =
-                          await _authRepository.registerUser(email, password);
-                      //TODO Hide progress
-                      if (result is SuccessResult) {
-                        Get.snackbar("Success", "Submitted!",
-                            snackPosition: SnackPosition.BOTTOM);
-                      } else if (result is ErrorResult) {
-                        Get.snackbar("API Error", "${result.exception}");
-                      }
-                      Get.offAndToNamed(AppRoutes.LOGIN);
+                      _registerController.submitRegistrationForm();
                     } else {
                       Get.snackbar("Fail", "Check errors",
                           snackPosition: SnackPosition.BOTTOM);

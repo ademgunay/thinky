@@ -23,7 +23,14 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+          focusColor: Colors.purple,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.purple)
+          ),
+        ),
+      ),
       initialRoute: AppRoutes.INITIAL,
       getPages: AppPages.pages,
     );
