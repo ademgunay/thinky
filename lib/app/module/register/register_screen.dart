@@ -105,9 +105,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _registerController.submitRegistrationForm();
-                    } else {
-                      Get.snackbar("Fail", "Check errors",
-                          snackPosition: SnackPosition.BOTTOM);
                     }
                   },
                 ),
