@@ -8,11 +8,17 @@ import 'package:thinky/app/routes/app_routes.dart';
 abstract class AppPages {
   static final pages = [
     GetPage(
-        name: AppRoutes.INITIAL,
-        page: () => WelcomeScreen(),
-        binding: RegisterBindings(),
+      name: AppRoutes.INITIAL,
+      page: () => WelcomeScreen(),
+      binding: RegisterBindings(),
     ),
-    GetPage(name: AppRoutes.LOGIN, page: () => LoginScreen()),
-    GetPage(name: AppRoutes.REGISTER, page: () => RegisterScreen())
+    GetPage(
+      name: AppRoutes.LOGIN,
+      page: () => LoginScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.REGISTER,
+      page: () => RegisterScreen(),
+    )
   ];
 }

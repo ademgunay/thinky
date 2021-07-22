@@ -13,6 +13,7 @@ class RegisterController extends GetxController {
   Rx<String> errorText = "".obs;
 
   Future<void> submitRegistrationForm() async {
+    clearErrors();
     Get.loadingDialog();
     ResponseResult result =
         await _authRepository.registerUser(email.value, password.value);
