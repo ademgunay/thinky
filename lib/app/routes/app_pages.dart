@@ -13,7 +13,6 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.INITIAL,
       page: () => WelcomeScreen(),
-      binding: RegisterBindings(),
     ),
     GetPage(
       name: AppRoutes.LOGIN,
@@ -23,6 +22,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.REGISTER,
       page: () => RegisterScreen(),
+      binding: RegisterBindings(),
     ),
     GetPage(
       name: AppRoutes.HOME,
