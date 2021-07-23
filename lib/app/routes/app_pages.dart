@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:thinky/app/module/login/login_bindings.dart';
 import 'package:thinky/app/module/login/login_screen.dart';
 import 'package:thinky/app/module/register/register_bindings.dart';
 import 'package:thinky/app/module/register/register_screen.dart';
@@ -15,6 +16,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => LoginScreen(),
+      binding: LoginBindings(),
     ),
     GetPage(
       name: AppRoutes.REGISTER,

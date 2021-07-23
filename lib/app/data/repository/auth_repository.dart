@@ -36,4 +36,31 @@ class AuthRepository {
           ResponseException(message: "Something went wrong"));
     }
   }
+
+  Future<ResponseResult> loginUser(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      return ResponseResult.complete();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print("This email doesn't exist");
+        return ResponseResult.error(
+            ResponseException(message: "This email was not found"));
+      } else if (e.code == 'wrong-password') {
+        print(e.message);
+        return ResponseResult.error(
+            ResponseException(message: "Email or password is incorrect."));
+      } else if (e.code == 'invalid-email') {
+        print(e.message);
+        return ResponseResult.error(ResponseException(message: e.message));
+      } else {
+        print(e);
+        return ResponseResult.error(ResponseException(message: e.message));
+      }
+    } catch (e) {
+      print(e);
+      return ResponseResult.error(
+          ResponseException(message: "Something went wrong"));
+    }
+  }
 }

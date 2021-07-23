@@ -103,7 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     textStyle: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (_formKey.currentState?.validate() == true) {
                       _registerController.submitRegistrationForm();
                     }
                   },
