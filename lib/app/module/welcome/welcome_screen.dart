@@ -20,9 +20,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 64,
-              ),
+              SizedBox(height: 100),
               ElevatedButton(
                 onPressed: () => Get.toNamed(AppRoutes.LOGIN),
                 style: ElevatedButton.styleFrom(
@@ -38,7 +36,7 @@ class WelcomeScreen extends StatelessWidget {
                   textStyle: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 child: Text("Register"),
-              )
+              ),
             ],
           ),
         ),

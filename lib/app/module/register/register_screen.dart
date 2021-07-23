@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }
                   },
                 ),
-                SizedBox(height: 48),
+                SizedBox(height: 100), //Compensate AppBar height
               ],
             ),
           ),
