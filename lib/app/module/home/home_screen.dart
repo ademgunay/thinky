@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thinky/app/routes/app_routes.dart';
 
+import 'home_controller.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -11,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  final GlobalKey<FormState> _formKey = new GlobalKey();
+  HomeController _homeController = Get.find<HomeController>();
   AnimationController? _animationController;
 
   @override
@@ -93,24 +97,40 @@ class _HomeScreenState extends State<HomeScreen>
                 //TODO Add upload image to be linked in the poke
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 16),
-                  child: TextFormField(
-                    autocorrect: false,
-                    onChanged: (newText) {
-                      //TODO add email handler in controller
-                    },
-                    //TODO Add validator
-                    validator: (_) {},
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Who do you want to poke? (email)',
+                  child: Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      autocorrect: false,
+                      onChanged: (newText) {
+                        _homeController.email.value = newText;
+                      },
+                      validator: (_) => _homeController.emailValidator(),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Who do you want to poke? (email)',
+                      ),
+                      cursorColor: Colors.purple,
                     ),
-                    cursorColor: Colors.purple,
+                  ),
+                ),
+                Obx(
+                  () => Visibility(
+                    visible:
+                        _homeController.errorText.value != "" ? true : false,
+                    child: Text(
+                      _homeController.errorText.value,
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                 ),
                 SizedBox(height: 32),
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        _homeController.onSendClicked();
+                      }
+                    },
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.purple),

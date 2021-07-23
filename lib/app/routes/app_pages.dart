@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:thinky/app/module/home/home_bindings.dart';
 import 'package:thinky/app/module/home/home_screen.dart';
 import 'package:thinky/app/module/login/login_bindings.dart';
 import 'package:thinky/app/module/login/login_screen.dart';
@@ -26,6 +27,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.HOME,
       page: () => HomeScreen(),
+      binding: HomeBindings(),
     ),
   ];
 }
