@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:thinky/app/core/response_result.dart';
 import 'package:thinky/app/core/widget/loading_dialog.dart';
 import 'package:thinky/app/data/repository/auth_repository.dart';
+import 'package:thinky/app/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   AuthRepository _authRepository = Get.find<AuthRepository>();
@@ -37,7 +38,7 @@ class LoginController extends GetxController {
     Get.back();
     if (result is CompleteResult) {
       print("LOGIN SUCCESS: $result");
-      //TODO Handle success case
+      Get.offAndToNamed(AppRoutes.HOME);
     } else if (result is ErrorResult) {
       print("LOGIN FAILED: $result");
       errorText.value =
