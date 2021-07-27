@@ -63,4 +63,8 @@ class AuthRepository {
           ResponseException(message: "Something went wrong"));
     }
   }
+
+  void logoutUser() {
+    _auth.signOut();
+  }
 }

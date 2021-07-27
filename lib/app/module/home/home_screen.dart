@@ -72,8 +72,10 @@ class _HomeScreenState extends State<HomeScreen>
                 ListTile(
                   title: Text("Logout"),
                   leading: Icon(Icons.logout),
-                  //TODO Add logout logic
-                  onTap: () => Get.offAllNamed(AppRoutes.INITIAL),
+                  onTap: () {
+                    _homeController.onLogoutClicked();
+                    Get.offAllNamed(AppRoutes.INITIAL);
+                  },
                 )
               ],
             ),
