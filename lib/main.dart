@@ -13,12 +13,10 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   final AuthRepository authRepository = Get.put(AuthRepository());
 
   @override
   Widget build(BuildContext context) {
-
     print(authRepository.isSignedIn());
 
     return GetMaterialApp(
@@ -26,12 +24,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         inputDecorationTheme: InputDecorationTheme(
           focusColor: Colors.purple,
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.purple)
-          ),
+          focusedBorder:
+              OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
         ),
       ),
-      initialRoute: AppRoutes.INITIAL,
+      initialRoute:
+          //TODO when have time:
+          /// You should not use this getter to determine the users current state,
+          /// instead use [authStateChanges], [idTokenChanges] or [userChanges] to
+          /// subscribe to updates.
+          authRepository.isSignedIn() ? AppRoutes.INITIAL : AppRoutes.HOME,
       getPages: AppPages.pages,
     );
   }
