@@ -5,9 +5,9 @@ class AuthRepository {
   late FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool isSignedIn() {
-    print("current user email: ${_auth.currentUser!.email}");
-    print("current user is verified: ${_auth.currentUser!.emailVerified}");
-    print("current user metadata: ${_auth.currentUser!.metadata}");
+    print("current user email: ${_auth.currentUser?.email}");
+    print("current user is verified: ${_auth.currentUser?.emailVerified}");
+    print("current user metadata: ${_auth.currentUser?.metadata}");
     return _auth.currentUser != null;
   }
 
