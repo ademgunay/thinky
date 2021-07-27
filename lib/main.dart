@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     print(authRepository.isSignedIn());
 
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Thinky',
       theme: ThemeData.dark().copyWith(
         inputDecorationTheme: InputDecorationTheme(
           focusColor: Colors.purple,
