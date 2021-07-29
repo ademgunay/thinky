@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,32 +88,31 @@ class _HomeScreenState extends State<HomeScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Center(
-                  child: Text(
-                    "Send a poke!",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                    ),
+                Text(
+                  "Send a poke to",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 36,
                   ),
                 ),
-                SizedBox(height: 32),
-                //TODO Add upload image to be linked in the poke
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 16),
-                  child: Form(
-                    key: _formKey,
-                    child: TextFormField(
-                      autocorrect: false,
-                      onChanged: (newText) {
-                        _homeController.email.value = newText;
-                      },
-                      validator: (_) => _homeController.emailValidator(),
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Who do you want to poke? (email)',
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 16),
+                    child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        autocorrect: false,
+                        onChanged: (newText) {
+                          _homeController.email.value = newText;
+                        },
+                        validator: (_) => _homeController.emailValidator(),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Enter receiver\'s email',
+                        ),
+                        cursorColor: Colors.purple,
                       ),
-                      cursorColor: Colors.purple,
                     ),
                   ),
                 ),
@@ -125,7 +126,28 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ),
                 ),
-                SizedBox(height: 32),
+                //TODO Add upload image to be linked in the poke
+                Center(
+                    child: Text(
+                  "Add an image",
+                  style: TextStyle(fontSize: 18),
+                )),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
+                  child: InkWell(
+                    onTap: () => _homeController.startUploadImageFlow(),
+                    child: Obx(
+                      () => AspectRatio(
+                        aspectRatio: 1,
+                        child: _homeController.pickedImagePath.value.isNotEmpty
+                            ? Image.file(File(_homeController.pickedImagePath.value))
+                            : Card(child: Icon(Icons.add)),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
@@ -147,9 +169,6 @@ class _HomeScreenState extends State<HomeScreen>
                     child: Icon(Icons.send),
                   ),
                 ),
-                SizedBox(
-                  height: 100,
-                ) //Compensate AppBar size
               ],
             ),
           ),
