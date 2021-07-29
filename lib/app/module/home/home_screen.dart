@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
             icon: AnimatedIcon(
               icon: AnimatedIcons.menu_close,
               color: _homeController.isLightTheme.value == true
-                  ? Colors.grey
+                  ? Colors.grey.shade700
                   : Colors.white,
               progress: _animationController!,
             ),
