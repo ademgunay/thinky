@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           /// You should not use this getter to determine the users current state,
           /// instead use [authStateChanges], [idTokenChanges] or [userChanges] to
           /// subscribe to updates.
-          authRepository.isSignedIn() ? AppRoutes.INITIAL : AppRoutes.HOME,
+          authRepository.isSignedIn() ? AppRoutes.HOME : AppRoutes.INITIAL,
       getPages: AppPages.pages,
     );
   }
