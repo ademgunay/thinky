@@ -34,6 +34,9 @@ class _HomeScreenState extends State<HomeScreen>
           leading: IconButton(
             icon: AnimatedIcon(
               icon: AnimatedIcons.menu_close,
+              color: _homeController.isLightTheme.value == true
+                  ? Colors.grey
+                  : Colors.white,
               progress: _animationController!,
             ),
             onPressed: () {
@@ -65,11 +68,16 @@ class _HomeScreenState extends State<HomeScreen>
                   //TODO Open profile
                   onTap: () {},
                 ),
-                ListTile(
-                  title: Text("Change theme [WIP]"),
-                  leading: Icon(Icons.light_mode),
-                  //TODO Add changing theme
-                  onTap: () {},
+                Obx(
+                  () => ListTile(
+                    title: Text("Change theme"),
+                    leading: Icon(_homeController.isLightTheme.value == true
+                        ? Icons.dark_mode
+                        : Icons.light_mode),
+                    onTap: () {
+                      _homeController.onChangeThemeClicked();
+                    },
+                  ),
                 ),
                 ListTile(
                   title: Text("Logout"),
@@ -141,7 +149,8 @@ class _HomeScreenState extends State<HomeScreen>
                       () => AspectRatio(
                         aspectRatio: 1,
                         child: _homeController.pickedImagePath.value.isNotEmpty
-                            ? Image.file(File(_homeController.pickedImagePath.value))
+                            ? Image.file(
+                                File(_homeController.pickedImagePath.value))
                             : Card(child: Icon(Icons.add)),
                       ),
                     ),

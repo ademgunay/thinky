@@ -6,6 +6,8 @@ import 'package:thinky/app/data/repository/auth_repository.dart';
 import 'package:thinky/app/routes/app_pages.dart';
 import 'package:thinky/app/routes/app_routes.dart';
 
+import 'app/core/Constants.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -21,13 +23,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       title: 'Thinky',
-      theme: ThemeData.dark().copyWith(
-        inputDecorationTheme: InputDecorationTheme(
-          focusColor: Colors.purple,
-          focusedBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.purple)),
-        ),
-      ),
+      theme: appDarkTheme,
       initialRoute:
           //TODO when have time:
           /// You should not use this getter to determine the users current state,
