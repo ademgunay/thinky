@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
+    _homeController.getCurrentTheme();
   }
 
   @override
@@ -90,95 +91,97 @@ class _HomeScreenState extends State<HomeScreen>
               ],
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  "Send a poke to",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 36,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 16),
-                    child: Form(
-                      key: _formKey,
-                      child: TextFormField(
-                        autocorrect: false,
-                        onChanged: (newText) {
-                          _homeController.email.value = newText;
-                        },
-                        validator: (_) => _homeController.emailValidator(),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Enter receiver\'s email',
-                        ),
-                        cursorColor: Colors.purple,
-                      ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Send a poke to",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 36,
                     ),
                   ),
-                ),
-                Obx(
-                  () => Visibility(
-                    visible:
-                        _homeController.errorText.value != "" ? true : false,
-                    child: Text(
-                      _homeController.errorText.value,
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
-                ),
-                //TODO Add upload image to be linked in the poke
-                Center(
-                    child: Text(
-                  "Add an image",
-                  style: TextStyle(fontSize: 18),
-                )),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
-                  child: InkWell(
-                    onTap: () => _homeController.startUploadImageFlow(),
-                    child: Obx(
-                      () => AspectRatio(
-                        aspectRatio: 1,
-                        child: _homeController.pickedImagePath.value.isNotEmpty
-                            ? Image.file(
-                                File(_homeController.pickedImagePath.value))
-                            : Card(child: Icon(Icons.add)),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        _homeController.onSendClicked();
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.purple),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(150),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 16),
+                      child: Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          autocorrect: false,
+                          onChanged: (newText) {
+                            _homeController.email.value = newText;
+                          },
+                          validator: (_) => _homeController.emailValidator(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter receiver\'s email',
+                          ),
+                          cursorColor: Colors.purple,
                         ),
                       ),
-                      minimumSize:
-                          MaterialStateProperty.all<Size>(Size(96, 96)),
                     ),
-                    child: Icon(Icons.send),
                   ),
-                ),
-              ],
+                  Obx(
+                    () => Visibility(
+                      visible:
+                          _homeController.errorText.value != "" ? true : false,
+                      child: Text(
+                        _homeController.errorText.value,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  //TODO Add upload image to be linked in the poke
+                  Center(
+                      child: Text(
+                    "Add an image",
+                    style: TextStyle(fontSize: 18),
+                  )),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32),
+                    child: InkWell(
+                      onTap: () => _homeController.startUploadImageFlow(),
+                      child: Obx(
+                        () => AspectRatio(
+                          aspectRatio: 1,
+                          child: _homeController.pickedImagePath.value.isNotEmpty
+                              ? Image.file(
+                                  File(_homeController.pickedImagePath.value))
+                              : Card(child: Icon(Icons.add)),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() == true) {
+                          _homeController.onSendClicked();
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(150),
+                          ),
+                        ),
+                        minimumSize:
+                            MaterialStateProperty.all<Size>(Size(96, 96)),
+                      ),
+                      child: Icon(Icons.send),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
